@@ -1,9 +1,9 @@
-name: postgres-sample-flow
+name: sample-flow
 
 on:
   push:
     branches:
-      - postgres
+      - main
 
 
 jobs:
