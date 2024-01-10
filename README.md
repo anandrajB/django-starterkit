@@ -46,7 +46,7 @@ For installation copy the below section
 
 ### Clone the Repository
 ```bash
-git clone -b postgres https://github.com/venzo-tech/venzo_django_starter.git
+git clone https://github.com/venzo-tech/venzo_django_starter.git
 cd venzo_django_starter
 ```
 
