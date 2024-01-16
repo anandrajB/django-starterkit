@@ -72,9 +72,3 @@ docker-compose build
 docker-compose up
 ```
 
-
-### run pre-commit and push to your repo 
-
-```bash
-pre-commit run --all-files
-```

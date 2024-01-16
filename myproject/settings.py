@@ -3,6 +3,13 @@ from pathlib import Path
 import dotenv
 
 
+
+
+# --------------#
+#  ENV CONFIG   #
+# --------------#
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -24,8 +31,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,17 +41,16 @@ INSTALLED_APPS = [
     'myapp',
 ]
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+
 
 ROOT_URLCONF = 'myproject.urls'
+
+
+
+# ------------------#
+#  TEMPLATE CONFIG  #
+# ------------------#
+
 
 TEMPLATES = [
     {
@@ -75,9 +79,9 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
 
-# -----------------------#
-#  DATABASE CONFIG - 1  #
-# -----------------------#
+# -------------------#
+#  DATABASE CONFIG   #
+# -------------------#
 
 DATABASES = {
     'default': {
@@ -109,6 +113,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
+# -----------------------#
+#  INTERNATIONALIZATION   #
+# -----------------------#
+
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -118,15 +127,33 @@ USE_I18N = True
 USE_TZ = True
 
 
-# -----------------------#
-#  IMPORTANT CONFIG - 3  #
-# -----------------------#
+# -------------------------#
+#  STATIC AND MEDIA CONFIG  #
+# --------------------------#
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+
+# --------------------#
+#  MIDDLEWARE CONFIG  #
+# --------------------#
+
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
