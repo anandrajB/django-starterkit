@@ -1,9 +1,7 @@
 import os
 from pathlib import Path
+
 import dotenv
-
-
-
 
 # --------------#
 #  ENV CONFIG   #

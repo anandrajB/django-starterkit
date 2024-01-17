@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path
-from myapp.views import index , page1
+from myapp.views import index, page1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
