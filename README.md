@@ -38,6 +38,7 @@ cd venzo_django_starter
 
 ### Install required vs code extensions
 - Open Visual Studio Code on your local machine.
+- Navigate to .devcontainer/devcontainer.json .
 - Press Ctrl + P (Windows/Linux) or Cmd + P (Mac) to open the command palette.
 - Enter > ***Extensions: Install Extensions*** and press Enter.
 
