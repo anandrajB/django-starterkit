@@ -3,6 +3,11 @@ from pathlib import Path
 
 import dotenv
 
+import sentry_sdk
+from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
+from sentry_sdk.integrations.django import DjangoIntegration
+
+
 # --------------#
 #  ENV CONFIG   #
 # --------------#
@@ -16,33 +21,29 @@ if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
 
-
-
 # -----------------------#
 #  IMPORTANT CONFIG - 1  #
 # -----------------------#
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'myapp',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "myapp",
 ]
 
 
-
-ROOT_URLCONF = 'myproject.urls'
-
+ROOT_URLCONF = "myproject.urls"
 
 
 # ------------------#
@@ -52,20 +53,19 @@ ROOT_URLCONF = 'myproject.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
-
 
 
 # -----------------------#
@@ -73,8 +73,7 @@ TEMPLATES = [
 # -----------------------#
 
 
-WSGI_APPLICATION = 'myproject.wsgi.application'
-
+WSGI_APPLICATION = "myproject.wsgi.application"
 
 
 # -------------------#
@@ -82,33 +81,31 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # -------------------#
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'mydatabase'),
-        'USER': os.environ.get('POSTGRES_USER', 'myuser'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'mypassword'),
-        'HOST': 'postgres',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DB", "mydatabase"),
+        "USER": os.environ.get("POSTGRES_USER", "myuser"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "mypassword"),
+        "HOST": "postgres",
+        "PORT": "5432",
     }
 }
 
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 
 # -----------------------#
@@ -116,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # -----------------------#
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -129,12 +126,9 @@ USE_TZ = True
 #  STATIC AND MEDIA CONFIG  #
 # --------------------------#
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
 # --------------------#
@@ -143,25 +137,22 @@ STATICFILES_DIRS = (
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # -----------------#
 #  LOGGING CONFIG  #
 # ----------------#
-
 
 
 LOGGING = {
@@ -184,3 +175,21 @@ LOGGING = {
         },
     },
 }
+
+
+# -----------------#
+#  SENTRY CONFIG  #
+# ----------------#
+
+
+# sentry_sdk.init(
+#     dsn="https://mysentrydsn.com",
+#     integrations=[
+#         DjangoIntegration(),
+#     ],
+#     # in_production
+#     profiles_sample_rate=1.0,
+#     traces_sample_rate=1.0,
+#     sample_rate=0.25,
+#     send_default_pii=True,
+# )
