@@ -105,6 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# ---------------#
+#  AUTH SETUP    #
+# ---------------#
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
@@ -117,6 +121,33 @@ REST_FRAMEWORK = {
 }
 
 
+# ---------------#
+#  EMAIL SETUP   #
+# ---------------#
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "example@host.com"
+EMAIL_HOST_PASSWORD = "mypassword"
+
+
+# -----------------------#
+#  CELERY CONFIGURATION  #
+# -----------------------#
+
+CELERY_BROKER_URL = os.environ.get("CELERY_URL")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_URL")
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_TIMEZONE = "Asia/Kolkata"
+
+
 # -----------------------#
 #  INTERNATIONALIZATION   #
 # -----------------------#
@@ -124,9 +155,11 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 

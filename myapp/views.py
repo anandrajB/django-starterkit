@@ -1,10 +1,13 @@
 import datetime
 import logging
-from django.shortcuts import render
+
 from djeasyview.views import DjeasyListCreateAPI, DjeasyRetrieveUpdateAPI
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializers import ProfileSerializer, UserSerializer
-from .models import User, Profile
+from rest_framework.permissions import AllowAny
+
+from django.shortcuts import render
+
+from .models import User
+from .serializers import UserSerializer
 
 logger = logging.getLogger(__name__)
 
