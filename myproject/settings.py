@@ -3,11 +3,6 @@ from pathlib import Path
 
 import dotenv
 
-import sentry_sdk
-from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
-from sentry_sdk.integrations.django import DjangoIntegration
-
-
 # --------------#
 #  ENV CONFIG   #
 # --------------#
@@ -40,6 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "myapp",
+    "rest_framework",
+    "rest_framework.authtoken",
 ]
 
 
@@ -106,6 +103,18 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
+    ],
+}
 
 
 # -----------------------#
@@ -180,6 +189,11 @@ LOGGING = {
 # -----------------#
 #  SENTRY CONFIG  #
 # ----------------#
+
+
+# import sentry_sdk
+# from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
+# from sentry_sdk.integrations.django import DjangoIntegration
 
 
 # sentry_sdk.init(
