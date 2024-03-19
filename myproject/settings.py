@@ -89,6 +89,16 @@ DATABASES = {
 }
 
 
+# ---------------------#
+#     AUTHENTICATION   #
+# ---------------------#
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "myproject.authentication.CustomAuthenticationBackend",
+]
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
