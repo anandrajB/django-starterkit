@@ -11,7 +11,6 @@ class CustomAuthenticationBackend(ModelBackend):
     ):
         try:
             """write your own custom logic"""
-            pass
         except User.DoesNotExist:
             return None
 

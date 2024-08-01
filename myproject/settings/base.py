@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-
+from myproject.database.connection import DATABASE_CONFIG
+import os
 import dotenv
 
 # --------------#
@@ -22,10 +23,6 @@ if os.path.isfile(dotenv_file):
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -40,7 +37,7 @@ INSTALLED_APPS = [
 ]
 
 
-ROOT_URLCONF = "myproject.urls"
+ROOT_URLCONF = "myproject.urls.urls"
 
 
 # ------------------#
@@ -77,16 +74,7 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 #  DATABASE CONFIG   #
 # -------------------#
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB", "mydatabase"),
-        "USER": os.environ.get("POSTGRES_USER", "myuser"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "mypassword"),
-        "HOST": "postgres",
-        "PORT": "5432",
-    }
-}
+DATABASES = DATABASE_CONFIG
 
 
 # ---------------------#
@@ -95,7 +83,7 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "myproject.authentication.CustomAuthenticationBackend",
+    "myproject.config.authentication.CustomAuthenticationBackend",
 ]
 
 
@@ -135,13 +123,6 @@ REST_FRAMEWORK = {
 #  EMAIL SETUP   #
 # ---------------#
 
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "example@host.com"
-EMAIL_HOST_PASSWORD = "mypassword"
 
 
 # -----------------------#
@@ -200,53 +181,3 @@ MIDDLEWARE = [
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-# -----------------#
-#  LOGGING CONFIG  #
-# ----------------#
-
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-    "root": {
-        "handlers": ["console"],
-        "level": "WARNING",
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-            "propagate": False,
-        },
-    },
-}
-
-
-# -----------------#
-#  SENTRY CONFIG  #
-# ----------------#
-
-
-# import sentry_sdk
-# from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
-# from sentry_sdk.integrations.django import DjangoIntegration
-
-
-# sentry_sdk.init(
-#     dsn="https://mysentrydsn.com",
-#     integrations=[
-#         DjangoIntegration(),
-#     ],
-#     # in_production
-#     profiles_sample_rate=1.0,
-#     traces_sample_rate=1.0,
-#     sample_rate=0.25,
-#     send_default_pii=True,
-# )
