@@ -9,7 +9,7 @@ import dotenv
 # --------------#
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 dotenv_file = os.path.join(BASE_DIR, ".env")
@@ -67,8 +67,8 @@ TEMPLATES = [
 # -----------------------#
 
 
-WSGI_APPLICATION = "myproject.wsgi.application"
-
+WSGI_APPLICATION = "myproject.server.wsgi.application"
+ASGI_APPLICATION = "myproject.server.wsgi.application"
 
 # -------------------#
 #  DATABASE CONFIG   #
@@ -122,7 +122,6 @@ REST_FRAMEWORK = {
 # ---------------#
 #  EMAIL SETUP   #
 # ---------------#
-
 
 
 # -----------------------#
