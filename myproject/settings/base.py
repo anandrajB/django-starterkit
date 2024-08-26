@@ -10,7 +10,7 @@ import dotenv
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
+ALLOWED_HOSTS = ["*"]
 
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):

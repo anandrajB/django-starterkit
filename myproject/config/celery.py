@@ -1,6 +1,6 @@
 import os
 
-from myproject.config.celery import Celery
+from celery import Celery
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

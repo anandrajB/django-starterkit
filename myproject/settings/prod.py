@@ -4,7 +4,7 @@ from .base import *  # noqa
 #  BASE CONFIGURATION      #
 # ------------------------#
 
-DEBUG = True
+DEBUG = False
 
 DEV = False
 
