@@ -3,6 +3,7 @@ from pathlib import Path
 from myproject.database.connection import DATABASE_CONFIG
 import os
 import dotenv
+from myapp.enum.base import AppEnum
 
 # --------------#
 #  ENV CONFIG   #
@@ -15,6 +16,23 @@ ALLOWED_HOSTS = ["*"]
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
+
+
+# ---------------#
+#  APP SETTINGS  #
+# ---------------#
+
+APP_ENV = os.environ.get("APP_ENV")
+
+APP_VERSION = "1"
+
+APPEND_SLASH = True
+
+
+if APP_ENV in [AppEnum.LOCAL, AppEnum.TEST]:
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
 
 
 # -----------------------#
@@ -117,6 +135,19 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ],
 }
+
+
+if APP_ENV == AppEnum.PROD or APP_ENV == AppEnum.TEST:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = (
+        ("rest_framework.renderers.JSONRenderer"),
+    )
+
+
+# -------------------#
+#  MIGRATION PATH    #
+# -------------------#
+
+MIGRATION_MODULES = {}
 
 
 # ---------------#
