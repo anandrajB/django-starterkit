@@ -1,5 +1,4 @@
 # MY PROJECT LOGO
-![Venzo Logo](https://venzotechnologies.com/static/media/logo.20c3af3bf8b6aedba1ed0e68ca927882.svg)
 
 # MY PROJECT NAME 
 

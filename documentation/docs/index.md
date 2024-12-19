@@ -1,9 +1,7 @@
 
-![Venzo Logo](https://venzotechnologies.com/static/media/logo.20c3af3bf8b6aedba1ed0e68ca927882.svg)
+#  Django Starter Pack
 
-# Venzo Django Starter Pack
-
-Welcome to the venzo Django Starter Pack! This starter pack is designed to help you kickstart your Django projects with some essential configurations and features.
+Welcome to the Django Starter Pack! This starter pack is designed to help you kickstart your Django projects with some essential configurations and features.
 
 ## Getting Started
 
@@ -31,8 +29,8 @@ https://docs.docker.com/engine/install/
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/venzo-tech/venzo_django_starter.git
-cd venzo_django_starter
+
+cd django-starterkit
 ```
 
 
